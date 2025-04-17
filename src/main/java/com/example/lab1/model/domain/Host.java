@@ -1,10 +1,11 @@
-package com.example.lab1.model;
+package com.example.lab1.model.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+@Data
 @Entity
 public class Host {
 

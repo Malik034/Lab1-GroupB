@@ -1,11 +1,12 @@
-package com.example.lab1.model;
+package com.example.lab1.model.domain;
 
 import com.example.lab1.model.enumerations.AccommodationCategory;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+@Data
 @Entity
 public class Accommodation {
 
@@ -23,7 +24,6 @@ public class Accommodation {
     private int numRooms;
 
     private boolean rented;
-
 
     public Accommodation() {
 

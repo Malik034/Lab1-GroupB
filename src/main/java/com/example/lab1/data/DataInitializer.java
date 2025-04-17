@@ -1,13 +1,17 @@
 package com.example.lab1.data;
 
-import com.example.lab1.model.Accommodation;
-import com.example.lab1.model.Country;
-import com.example.lab1.model.Host;
+import com.example.lab1.model.domain.Accommodation;
+import com.example.lab1.model.domain.Country;
+import com.example.lab1.model.domain.Host;
+import com.example.lab1.model.domain.User;
 import com.example.lab1.model.enumerations.AccommodationCategory;
+import com.example.lab1.model.enumerations.Role;
 import com.example.lab1.repository.AccommodationRepository;
 import com.example.lab1.repository.CountryRepository;
 import com.example.lab1.repository.HostRepository;
+import com.example.lab1.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,11 +20,15 @@ public class DataInitializer {
     private final CountryRepository countryRepository;
     private final HostRepository hostRepository;
     private final AccommodationRepository accommodationRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(CountryRepository countryRepository, HostRepository hostRepository, AccommodationRepository accommodationRepository) {
+    public DataInitializer(CountryRepository countryRepository, HostRepository hostRepository, AccommodationRepository accommodationRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.countryRepository = countryRepository;
         this.hostRepository = hostRepository;
         this.accommodationRepository = accommodationRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -37,5 +45,21 @@ public class DataInitializer {
         accommodationRepository.save(new Accommodation("Skopje Hotel", AccommodationCategory.HOTEL, host1, 100, true));
         accommodationRepository.save(new Accommodation("Brussels Apartment", AccommodationCategory.APARTMENT, host2, 4, false));
         accommodationRepository.save(new Accommodation("Beijing Motel", AccommodationCategory.MOTEL, host3, 30, true));
+
+        userRepository.save(new User(
+                "admin",
+                passwordEncoder.encode("admin"),
+                "test",
+                "test",
+                Role.ROLE_HOST
+        ));
+
+        userRepository.save(new User(
+                "user",
+                passwordEncoder.encode("user"),
+                "user",
+                "user",
+                Role.ROLE_USER
+        ));
     }
 }

@@ -1,7 +1,11 @@
 package com.example.lab1.web;
 
-import com.example.lab1.model.Host;
-import com.example.lab1.services.HostService;
+import com.example.lab1.dto.CreateHostDto;
+import com.example.lab1.dto.DisplayHostDto;
+import com.example.lab1.model.domain.Host;
+import com.example.lab1.services.application.impl.HostApplicationServiceImpl;
+import com.example.lab1.services.domain.HostService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,49 +15,47 @@ import java.util.List;
 @RequestMapping("/api/hosts")
 public class HostController {
 
-    private final HostService hostService;
+    private final HostApplicationServiceImpl hostService;
 
-    public HostController(HostService hostService) {
+    public HostController(HostApplicationServiceImpl hostService) {
         this.hostService = hostService;
     }
 
+    @Operation(summary = "Get all hosts", description = "Returns a list of all hosts.")
     @GetMapping
-    public ResponseEntity<List<Host>> findAll(){
-        return ResponseEntity.ok(this.hostService.findAll());
+    public List<DisplayHostDto> findAll() {
+        return hostService.findAll();
     }
 
+    @Operation(summary = "Get host by ID", description = "Returns a specific host by their ID.")
     @GetMapping("/{id}")
-    public ResponseEntity<Host> findById(@PathVariable Long id){
-        Host host = this.hostService.findById(id);
-        if (host == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(host);
+    public ResponseEntity<DisplayHostDto> findById(@PathVariable Long id) {
+        return hostService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Add a new host", description = "Creates a new host based on the provided data.")
     @PostMapping("/add")
-    public ResponseEntity<Host> addHost(@RequestBody Host host) {
-        Host host1 = this.hostService.save(host);
-        if(host1 == null){
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok().body(host1);
+    public ResponseEntity<DisplayHostDto> save(@RequestBody CreateHostDto createHostDto) {
+        return hostService.save(createHostDto)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Update existing host", description = "Updates a host with the given ID using the provided data.")
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Host> editHost(@PathVariable Long id, @RequestBody Host host){
-        Host host1 = this.hostService.update(id, host);
-        if (host1 == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(host1);
+    public ResponseEntity<DisplayHostDto> update(@PathVariable Long id, @RequestBody CreateHostDto createHostDto) {
+        return hostService.update(id, createHostDto)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Delete host by ID", description = "Deletes the host with the given ID.")
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteHost(@PathVariable Long id){
-        Host host1 = this.hostService.findById(id);
-        if(host1 != null){
-            this.hostService.delete(id);
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        if (hostService.findById(id).isPresent()) {
+            hostService.delete(id);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
