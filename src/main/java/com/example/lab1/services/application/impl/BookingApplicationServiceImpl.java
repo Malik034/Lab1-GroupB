@@ -1,7 +1,7 @@
 package com.example.lab1.services.application.impl;
 
-import com.example.lab1.dto.DisplayAccommodationDto;
-import com.example.lab1.dto.DisplayBookingDto;
+import com.example.lab1.dto.display.DisplayAccommodationDto;
+import com.example.lab1.dto.display.DisplayBookingDto;
 import com.example.lab1.services.application.BookingApplicationService;
 import com.example.lab1.services.domain.BookingService;
 import org.springframework.stereotype.Service;

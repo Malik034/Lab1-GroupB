@@ -1,11 +1,10 @@
 package com.example.lab1.web;
 
-import com.example.lab1.dto.CreateAccommodationDto;
-import com.example.lab1.dto.DisplayAccommodationDto;
-import com.example.lab1.model.domain.Accommodation;
+import com.example.lab1.dto.create.CreateAccommodationDto;
+import com.example.lab1.dto.display.DisplayAccommodationDto;
 import com.example.lab1.services.application.AccommodationApplicationService;
-import com.example.lab1.services.domain.AccommodationService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,5 +66,11 @@ public class AccommodationController {
         return accommodationService.setRented(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/by-host")
+    @Operation(summary = "")
+    public ResponseEntity<?> getAccommodationsPerHost() {
+        return ResponseEntity.status(HttpStatus.OK).body(accommodationService.getAccommodationsPerHost());
     }
 }

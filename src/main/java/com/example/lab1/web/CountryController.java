@@ -1,10 +1,8 @@
 package com.example.lab1.web;
 
-import com.example.lab1.dto.CreateCountryDto;
-import com.example.lab1.dto.DisplayCountryDto;
-import com.example.lab1.model.domain.Country;
+import com.example.lab1.dto.create.CreateCountryDto;
+import com.example.lab1.dto.display.DisplayCountryDto;
 import com.example.lab1.services.application.CountryApplicationService;
-import com.example.lab1.services.domain.CountryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

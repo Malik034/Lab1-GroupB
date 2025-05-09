@@ -1,8 +1,7 @@
-package com.example.lab1.dto;
+package com.example.lab1.dto.display;
 
 import com.example.lab1.model.domain.Booking;
 
-import java.awt.print.Book;
 import java.time.LocalDateTime;
 import java.util.List;
 

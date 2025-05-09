@@ -1,6 +1,5 @@
-package com.example.lab1.dto;
+package com.example.lab1.dto.display;
 
-import com.example.lab1.model.domain.Host;
 import com.example.lab1.model.domain.User;
 import com.example.lab1.model.enumerations.Role;
 

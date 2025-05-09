@@ -1,6 +1,7 @@
 package com.example.lab1.services.domain.impl;
 
 import com.example.lab1.model.domain.Host;
+import com.example.lab1.model.projections.HostNameProjection;
 import com.example.lab1.repository.HostRepository;
 import com.example.lab1.services.domain.HostService;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,10 @@ public class HostServiceImpl implements HostService {
     @Override
     public void delete(Long id) {
         this.hostRepository.deleteById(id);
+    }
+
+    @Override
+    public List<HostNameProjection> findHostNames() {
+        return hostRepository.findAllBy();
     }
 }

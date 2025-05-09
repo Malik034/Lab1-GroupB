@@ -1,11 +1,11 @@
 package com.example.lab1.web;
 
-import com.example.lab1.dto.CreateHostDto;
-import com.example.lab1.dto.DisplayHostDto;
-import com.example.lab1.model.domain.Host;
+import com.example.lab1.dto.create.CreateHostDto;
+import com.example.lab1.dto.display.DisplayHostDto;
+import com.example.lab1.model.projections.HostNameProjection;
 import com.example.lab1.services.application.impl.HostApplicationServiceImpl;
-import com.example.lab1.services.domain.HostService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,5 +59,16 @@ public class HostController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/by-country")
+    @Operation(summary = "")
+    public ResponseEntity<?> getHostPerCountry() {
+        return ResponseEntity.status(HttpStatus.OK).body(hostService.getHostPerCountry());
+    }
+
+    @GetMapping("/names")
+    public List<HostNameProjection> getHostNames() {
+        return hostService.findHostNames();
     }
 }

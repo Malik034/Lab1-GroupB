@@ -1,7 +1,8 @@
 package com.example.lab1.services.application.impl;
 
-import com.example.lab1.dto.CreateCountryDto;
-import com.example.lab1.dto.DisplayCountryDto;
+import com.example.lab1.dto.create.CreateCountryDto;
+import com.example.lab1.dto.display.DisplayCountryDto;
+import com.example.lab1.repository.HostsPerCountryViewRepository;
 import com.example.lab1.services.application.CountryApplicationService;
 import com.example.lab1.services.domain.CountryService;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class CountryApplicationServiceImpl implements CountryApplicationService {
 
     CountryService countryService;
+    HostsPerCountryViewRepository hostsPerCountryViewRepository;
 
-    public CountryApplicationServiceImpl(CountryService countryService) {
+    public CountryApplicationServiceImpl(CountryService countryService, HostsPerCountryViewRepository hostsPerCountryViewRepository) {
         this.countryService = countryService;
+        this.hostsPerCountryViewRepository = hostsPerCountryViewRepository;
     }
 
     @Override
@@ -41,5 +44,10 @@ public class CountryApplicationServiceImpl implements CountryApplicationService 
     @Override
     public void delete(Long id) {
         countryService.delete(id);
+    }
+
+    @Override
+    public void refreshMaterializedView() {
+        this.hostsPerCountryViewRepository.refreshMaterializedViews();
     }
 }

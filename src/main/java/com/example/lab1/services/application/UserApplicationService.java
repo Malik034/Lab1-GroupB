@@ -1,8 +1,8 @@
 package com.example.lab1.services.application;
 
-import com.example.lab1.dto.CreateUserDto;
-import com.example.lab1.dto.DisplayUserDto;
-import com.example.lab1.dto.LoginUserDto;
+import com.example.lab1.dto.create.CreateUserDto;
+import com.example.lab1.dto.display.DisplayUserDto;
+import com.example.lab1.dto.login.LoginUserDto;
 
 import java.util.Optional;
 

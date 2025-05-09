@@ -1,7 +1,7 @@
 package com.example.lab1.services.application;
 
-import com.example.lab1.dto.DisplayAccommodationDto;
-import com.example.lab1.dto.DisplayBookingDto;
+import com.example.lab1.dto.display.DisplayAccommodationDto;
+import com.example.lab1.dto.display.DisplayBookingDto;
 
 import java.util.List;
 import java.util.Optional;

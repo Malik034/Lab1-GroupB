@@ -1,6 +1,5 @@
-package com.example.lab1.dto;
+package com.example.lab1.dto.display;
 
-import com.example.lab1.model.domain.Country;
 import com.example.lab1.model.domain.Host;
 
 import java.util.List;

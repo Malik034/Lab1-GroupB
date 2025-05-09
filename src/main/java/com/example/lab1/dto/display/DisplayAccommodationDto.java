@@ -1,7 +1,6 @@
-package com.example.lab1.dto;
+package com.example.lab1.dto.display;
 
 import com.example.lab1.model.domain.Accommodation;
-import com.example.lab1.model.domain.Host;
 import com.example.lab1.model.enumerations.AccommodationCategory;
 
 import java.util.List;

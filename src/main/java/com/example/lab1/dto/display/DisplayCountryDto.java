@@ -1,4 +1,4 @@
-package com.example.lab1.dto;
+package com.example.lab1.dto.display;
 
 import com.example.lab1.model.domain.Country;
 

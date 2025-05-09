@@ -1,8 +1,8 @@
 package com.example.lab1.web;
 
-import com.example.lab1.dto.CreateUserDto;
-import com.example.lab1.dto.DisplayUserDto;
-import com.example.lab1.dto.LoginUserDto;
+import com.example.lab1.dto.create.CreateUserDto;
+import com.example.lab1.dto.display.DisplayUserDto;
+import com.example.lab1.dto.login.LoginUserDto;
 import com.example.lab1.model.exceptions.InvalidArgumentsException;
 import com.example.lab1.model.exceptions.InvalidUserCredentialsException;
 import com.example.lab1.model.exceptions.PasswordsDoNotMatchException;

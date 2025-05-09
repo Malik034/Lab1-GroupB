@@ -1,6 +1,6 @@
 package com.example.lab1.web;
 
-import com.example.lab1.dto.DisplayBookingDto;
+import com.example.lab1.dto.display.DisplayBookingDto;
 import com.example.lab1.model.domain.User;
 import com.example.lab1.services.application.BookingApplicationService;
 import io.swagger.v3.oas.annotations.Operation;

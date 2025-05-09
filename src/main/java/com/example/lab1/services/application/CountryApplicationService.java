@@ -1,7 +1,7 @@
 package com.example.lab1.services.application;
 
-import com.example.lab1.dto.CreateCountryDto;
-import com.example.lab1.dto.DisplayCountryDto;
+import com.example.lab1.dto.create.CreateCountryDto;
+import com.example.lab1.dto.display.DisplayCountryDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,5 +13,7 @@ public interface CountryApplicationService {
     Optional<DisplayCountryDto> save(CreateCountryDto createCountryDto);
     Optional<DisplayCountryDto> update(Long id,CreateCountryDto createCountryDto);
     void delete(Long id);
+    void refreshMaterializedView();
+
 
 }

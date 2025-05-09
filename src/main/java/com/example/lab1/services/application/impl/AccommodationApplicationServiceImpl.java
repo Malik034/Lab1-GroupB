@@ -1,7 +1,9 @@
 package com.example.lab1.services.application.impl;
 
-import com.example.lab1.dto.CreateAccommodationDto;
-import com.example.lab1.dto.DisplayAccommodationDto;
+import com.example.lab1.dto.create.CreateAccommodationDto;
+import com.example.lab1.dto.display.DisplayAccommodationDto;
+import com.example.lab1.model.views.AccommodationsPerHostView;
+import com.example.lab1.repository.AccommodationsPerHostViewRepository;
 import com.example.lab1.services.application.AccommodationApplicationService;
 import com.example.lab1.services.domain.AccommodationService;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class AccommodationApplicationServiceImpl implements AccommodationApplicationService {
 
     AccommodationService accommodationService;
+    AccommodationsPerHostViewRepository accommodationsPerHostViewRepository;
 
-    public AccommodationApplicationServiceImpl(AccommodationService accommodationService) {
+    public AccommodationApplicationServiceImpl(AccommodationService accommodationService, AccommodationsPerHostViewRepository accommodationsPerHostViewRepository) {
         this.accommodationService = accommodationService;
+        this.accommodationsPerHostViewRepository = accommodationsPerHostViewRepository;
     }
 
     @Override
@@ -46,5 +50,15 @@ public class AccommodationApplicationServiceImpl implements AccommodationApplica
     @Override
     public Optional<DisplayAccommodationDto> setRented(Long id) {
         return accommodationService.setRented(id).map(DisplayAccommodationDto::from);
+    }
+
+    @Override
+    public List<AccommodationsPerHostView> getAccommodationsPerHost() {
+        return this.accommodationsPerHostViewRepository.findAll();
+    }
+
+    @Override
+    public void refreshMaterializedView() {
+        accommodationsPerHostViewRepository.refreshMaterializedViews();
     }
 }
