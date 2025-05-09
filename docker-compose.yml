@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: emt_shop
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./d.sql:/docker-entrypoint-initdb.d/d.sql
       - ./views.sql:/docker-entrypoint-initdb.d/views.sql
 
     ports:
